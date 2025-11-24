@@ -11,9 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //check if user is authenticated /dashboard
-        //redirect to login page if not authenticated
-        //check if user is permitted to use access that page
+        //register middlewares here
+        $middleware->alias([
+            'allow-auth-users' => \App\Http\Middleware\AllowAuthUsers::class,
+            'clear-cache' => \App\Http\Middleware\ClearCache::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
