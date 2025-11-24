@@ -80,10 +80,10 @@ cd contact-manager
 composer install
 ```
 
-3. Create .env file
+3. Create `.env` file from `.env.config.example`
 
 ```bash
-cp .env.example .env
+cp .env.config.example .env
 ```
 
 Update the `.env` file with your database credentials:
