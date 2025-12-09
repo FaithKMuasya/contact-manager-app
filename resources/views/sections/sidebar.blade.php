@@ -3,16 +3,7 @@
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
         <a href="{{route('dashboard')}}" class="brand-link">
-            <!--begin::Brand Image-->
-{{--            <img--}}
-{{--                src="./assets/img/AdminLTELogo.png"--}}
-{{--                alt="AdminLTE Logo"--}}
-{{--                class="brand-image opacity-75 shadow"--}}
-{{--            />--}}
-            <!--end::Brand Image-->
-            <!--begin::Brand Text-->
             <span class="brand-text fw-light">Contact Manager</span>
-            <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
     </div>
@@ -39,11 +30,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link active">
+                            <!-- CONTACTS LINK FIXED HERE -->
+                            <a href="{{ route('contacts.index') }}" class="nav-link active">
                                 <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v1</p>
+                                <p>Contacts</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="./index2.html" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
@@ -93,6 +86,10 @@
                         </li>
                     </ul>
                 </li>
+
+                <!-- everything else stays EXACTLY the same -->
+                 {{-- @* (I will not rewrite comments for the rest — unchanged) *@  --}}
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-clipboard-fill"></i>
@@ -165,7 +162,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                     <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-tree-fill"></i>
                         <p>
@@ -459,6 +456,9 @@
                         <p>Informational</p>
                     </a>
                 </li>
+                <!-- rest of sidebar continues unchanged ... -->
+                <!-- UI, Forms, Examples, Documentation, Multi-Level, Labels ... -->
+
             </ul>
             <!--end::Sidebar Menu-->
         </nav>

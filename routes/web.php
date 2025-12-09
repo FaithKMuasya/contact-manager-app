@@ -5,6 +5,8 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +26,7 @@ Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
 Route::get('/signup', [SignupController::class, 'index'])->name('signup');
 Route::post('/signup', [SignupController::class, 'create'])->name('signup.create');
 
+
 /**
  * Create a middleware group
  * Routes inside this middleware will only be accesses when user is authenticated
@@ -36,6 +39,10 @@ Route::post('/signup', [SignupController::class, 'create'])->name('signup.create
  * Remember to register the middlewares in bootstrap/app.php
  */
 Route::middleware(['allow-auth-users', 'clear-cache'])->group(function () {
+     // Dashboard Module
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+     // Contacts Module
+    Route::resource('contacts', ContactController::class);
+
 });
 

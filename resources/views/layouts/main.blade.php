@@ -13,6 +13,15 @@
 <div class="app-wrapper">
     <!--begin::Header-->
     @include('sections.header')
+
+    <!--beautiful green alerts-->
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
     <!--end::Header-->
     <!--begin::Sidebar-->
     @include('sections.sidebar')
