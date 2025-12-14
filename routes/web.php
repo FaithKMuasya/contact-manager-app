@@ -4,45 +4,55 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-/**
- * Create a controller using the command below and edit functions inside it
- * > php artisan make:controller LoginController
- */
-
-/**
- * These controllers will be accessed without authentication
- */
+/*
+|--------------------------------------------------------------------------
+| Auth routes (no login required)
+|--------------------------------------------------------------------------
+*/
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
-Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
+
 Route::get('/signup', [SignupController::class, 'index'])->name('signup');
 Route::post('/signup', [SignupController::class, 'create'])->name('signup.create');
 
+Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
 
-/**
- * Create a middleware group
- * Routes inside this middleware will only be accesses when user is authenticated
- * if not authenticated(logged in), user will be redirected to /login
- * see (Http/Middleware/AllowAuthUsers.php)
- * create a middleware using command : php artisan make:middleware AllowAuthUsers
- * Also when user logs out, cache is cleared (see Http/Middleware/ClearCache.php)
- */
-/**
- * Remember to register the middlewares in bootstrap/app.php
- */
+/*
+|--------------------------------------------------------------------------
+| Protected routes (login required)
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['allow-auth-users', 'clear-cache'])->group(function () {
-     // Dashboard Module
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-     // Contacts Module
+
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    // Contacts
     Route::resource('contacts', ContactController::class);
 
-});
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
 
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
+
+    Route::put('/profile', [ProfileController::class, 'update'])
+        ->name('profile.update');
+
+         // 🔐 Change Password
+    Route::get('/profile/password', [ProfileController::class, 'password'])
+        ->name('profile.password');
+
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])
+        ->name('profile.password.update');
+});
